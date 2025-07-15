@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>{% block title %}My Blog{% endblock %}</title>
+    <style>
+      body {
+        font-family: sans-serif;
+        max-width: 700px;
+        margin: 2rem auto;
+      }
+      nav a {
+        margin-right: 1rem;
+      }
+      .post {
+        border-bottom: 1px solid #ccc;
+        padding: 1rem 0;
+      }
+      .comments {
+        margin-left: 1rem;
+        font-size: 0.9em;
+        color: #555;
+      }
+    </style>
+  </head>
+  <body>
+    <nav>
+      <a href="{% url 'post_list_page' %}">Home</a>
+    </nav>
+    <main>{% block content %}{% endblock %}</main>
+  </body>
+</html>

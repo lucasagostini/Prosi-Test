@@ -1,0 +1,24 @@
+{% extends "base.html" %} 
+{% block title %}Post Details{% endblock %} 
+{% block content %}
+<h1 id="title">Loading…</h1>
+<p id="content"></p>
+<h3>Comments (<span id="count">0</span>)</h3>
+<div id="comments"></div>
+
+<script>
+  // Django passed us the post ID as context
+  const postId = {{ post_id }};
+  async function loadPost() {
+    const res = await fetch(`/api/posts/${postId}/`);
+    const p = await res.json();
+    document.getElementById('title').textContent = p.title;
+    document.getElementById('content').textContent = p.content;
+    document.getElementById('count').textContent = p.comment_count;
+    document.getElementById('comments').innerHTML = p.comments.map(c => `
+      <p><em>${c.author}</em>: ${c.content}</p>
+    `).join('');
+  }
+  loadPost();
+</script>
+{% endblock %}
