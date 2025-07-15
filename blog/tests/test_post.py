@@ -13,7 +13,7 @@ def api_client():
 @pytest.mark.django_db
 def test_list_posts_empty(api_client):
     """GET /posts/ returns an empty list when no posts exist"""
-    url = reverse("post-list")  # adjust if your router basename differs
+    url = reverse("post-list")
     response = api_client.get(url)
     assert response.status_code == status.HTTP_200_OK
     assert response.data == []

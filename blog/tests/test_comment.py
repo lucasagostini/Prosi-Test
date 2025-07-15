@@ -14,9 +14,7 @@ def api_client():
 def test_create_comment_success(api_client):
     """POST /posts/{id}/comments/ creates a new comment"""
     post = BlogPost.objects.create(title="Foo", content="Bar")
-    url = reverse(
-        "post-comments", args=[post.id]
-    )  # adjust name if your nested route differs
+    url = reverse("post-comments", args=[post.id])
     data = {"author": "Alice", "content": "Nice post!"}
     response = api_client.post(url, data, format="json")
     assert response.status_code == status.HTTP_201_CREATED
@@ -52,7 +50,6 @@ def test_list_comments_not_allowed(api_client):
     post = BlogPost.objects.create(title="Foo", content="Bar")
     url = reverse("post-comments", args=[post.id])
     response = api_client.get(url)
-    # either list is not supported or returns list
     assert response.status_code in (
         status.HTTP_405_METHOD_NOT_ALLOWED,
         status.HTTP_200_OK,
