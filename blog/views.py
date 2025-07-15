@@ -8,9 +8,9 @@ from .serializers import BlogPostSerializer, CommentSerializer
 class PostViewSet(viewsets.ModelViewSet):
     queryset = BlogPost.objects.all()
     serializer_class = BlogPostSerializer
-    
-    @action(detail=True, methods=['post'], url_path='comments')
-    def create_comment(self, request, pk:None):
+
+    @action(detail=True, methods=["post"], url_path="comments")
+    def create_comment(self, request, pk: None):
         post = self.get_object()
         serializer = CommentSerializer(data=request.data)
         if serializer.is_valid():
